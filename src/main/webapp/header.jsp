@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
- <meta charset="utf-8">
+<meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <title>Sailor Bootstrap Template - Index</title>
@@ -37,6 +37,7 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 </head>
+
 <body>
 <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center">
@@ -49,20 +50,20 @@
         <ul>
           <li><a href="index.jsp" class="active">Home</a></li>
 
-          <li class="dropdown"><a href="#"><span>Registration</span> <i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown"><a href="#"><span>Login</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="customer-registration.jsp">As Customer</a></li>
-              <li><a href="seller-registration.jsp">As Seller</a></li>
+              <li><a href="seller-login.jsp">As Seller</a></li>
+              <li><a href="customer-login.jsp">As Customer</a></li>
+              <li><a href="admin-login.jsp">As Admin</a></li>
+
             </ul>
           </li>
-          <li class="dropdown"><a href="#"><span>Login</span> <i class="bi bi-chevron-down"></i></a>
-          <ul>
-          	  <li><a href="customer-login.jsp">As Customer</a></li>
-              <li><a href="seller-login.jsp">As Seller</a></li>
-              <li><a href="admin-login.jsp">As Admin</a></li>
-          </ul>
+          <li class="dropdown"><a href="#"><span>Registration</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="seller-registration.jsp">As Seller</a></li>
+              <li><a href="customer-registration.jsp">As Customer</a></li>
+            </ul>
           </li>
-        </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 

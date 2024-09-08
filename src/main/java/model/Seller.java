@@ -1,4 +1,5 @@
 package model;
+
 public class Seller {
 	private int id;
 	private String name,address,email,password;
@@ -27,7 +28,6 @@ public class Seller {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
 	public String getPassword() {
 		return password;
 	}
@@ -42,7 +42,8 @@ public class Seller {
 	}
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", address=" + address + ", email=" + email + ", password="
+		return "Seller [id=" + id + ", name=" + name + ", address=" + address + ", email=" + email + ", password="
 				+ password + ", contact=" + contact + "]";
 	}
+	
 }
