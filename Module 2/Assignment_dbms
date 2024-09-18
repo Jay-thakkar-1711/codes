@@ -1,0 +1,446 @@
+DBMS Querys:
+
+
+i. Select unique job from EMP table.
+
+
+mysql> select distinct job from emp;
++-----------+
+| job       |
++-----------+
+| Clerk     |
+| Salesman  |
+| Manager   |
+| Analyst   |
+| President |
++-----------+
+5 rows in set (0.01 sec)
+
+
+
+
+ii. List the details of the emps in asc order of the Dptnos and desc of Jobs?
+
+
+
+mysql> select * from emp order by deptno;
++-------+--------+-----------+------+------------+------+------+--------+
+| empno | ename  | job       | mgr  | hiredate   | sal  | comm | deptno |
++-------+--------+-----------+------+------------+------+------+--------+
+|  7782 | Clark  | Manager   | 7839 | 1981-06-09 | 2450 | NULL |     10 |
+|  7839 | King   | President | NULL | 1981-11-17 | 5000 | NULL |     10 |
+|  7934 | Miller | Clerk     | 7782 | 1982-01-23 | 1300 | NULL |     10 |
+|  7369 | Smith  | Clerk     | 7902 | 1980-12-17 |  800 | NULL |     20 |
+|  7566 | Jones  | Manager   | 7839 | 1981-04-02 | 2975 | NULL |     20 |
+|  7788 | Scott  | Analyst   | 7566 | 1987-06-11 | 3000 | NULL |     20 |
+|  7876 | Adams  | Clerk     | 7788 | 1987-07-13 | 1100 | NULL |     20 |
+|  7902 | Ford   | Analyst   | 7566 | 1981-03-12 | 3000 | NULL |     20 |
+|  7499 | Allen  | Salesman  | 7698 | 1981-02-20 | 1600 |  300 |     30 |
+|  7521 | Ward   | Salesman  | 7698 | 1981-02-22 | 1250 |  500 |     30 |
+|  7654 | Martin | Salesman  | 7698 | 1981-09-28 | 1250 | 1400 |     30 |
+|  7698 | Blake  | Manager   | 7839 | 1981-05-01 | 2850 | NULL |     30 |
+|  7844 | Turner | Salesman  | 7698 | 1981-08-09 | 1500 |    0 |     30 |
+|  7900 | James  | Clerk     | 7698 | 1981-03-12 |  950 | NULL |     30 |
++-------+--------+-----------+------+------------+------+------+--------+
+14 rows in set (0.00 sec)
+
+
+mysql> select * from emp order by job desc;
++-------+--------+-----------+------+------------+------+------+--------+
+| empno | ename  | job       | mgr  | hiredate   | sal  | comm | deptno |
++-------+--------+-----------+------+------------+------+------+--------+
+|  7499 | Allen  | Salesman  | 7698 | 1981-02-20 | 1600 |  300 |     30 |
+|  7521 | Ward   | Salesman  | 7698 | 1981-02-22 | 1250 |  500 |     30 |
+|  7654 | Martin | Salesman  | 7698 | 1981-09-28 | 1250 | 1400 |     30 |
+|  7844 | Turner | Salesman  | 7698 | 1981-08-09 | 1500 |    0 |     30 |
+|  7839 | King   | President | NULL | 1981-11-17 | 5000 | NULL |     10 |
+|  7566 | Jones  | Manager   | 7839 | 1981-04-02 | 2975 | NULL |     20 |
+|  7698 | Blake  | Manager   | 7839 | 1981-05-01 | 2850 | NULL |     30 |
+|  7782 | Clark  | Manager   | 7839 | 1981-06-09 | 2450 | NULL |     10 |
+|  7369 | Smith  | Clerk     | 7902 | 1980-12-17 |  800 | NULL |     20 |
+|  7876 | Adams  | Clerk     | 7788 | 1987-07-13 | 1100 | NULL |     20 |
+|  7900 | James  | Clerk     | 7698 | 1981-03-12 |  950 | NULL |     30 |
+|  7934 | Miller | Clerk     | 7782 | 1982-01-23 | 1300 | NULL |     10 |
+|  7788 | Scott  | Analyst   | 7566 | 1987-06-11 | 3000 | NULL |     20 |
+|  7902 | Ford   | Analyst   | 7566 | 1981-03-12 | 3000 | NULL |     20 |
++-------+--------+-----------+------+------------+------+------+--------+
+14 rows in set (0.00 sec)
+
+
+
+iii. Display all the unique job groups in the descending order?
+
+
+mysql> select distinct job from emp order by job desc;
++-----------+
+| job       |
++-----------+
+| Salesman  |
+| President |
+| Manager   |
+| Clerk     |
+| Analyst   |
++-----------+
+5 rows in set (0.01 sec)
+
+
+iv. List the emps who joined before 1981.
+
+
+mysql> select * from emp where year(hiredate)<1981;
++-------+-------+-------+------+------------+------+------+--------+
+| empno | ename | job   | mgr  | hiredate   | sal  | comm | deptno |
++-------+-------+-------+------+------------+------+------+--------+
+|  7369 | Smith | Clerk | 7902 | 1980-12-17 |  800 | NULL |     20 |
++-------+-------+-------+------+------------+------+------+--------+
+1 row in set (0.01 sec)
+
+
+v. List the Empno, Ename, Sal, Daily sal of all emps in the asc order of Annsal.
+mysql> select  empno,ename,sal,(sal/30) as daily_sal from emp order by hiredate;
++-------+--------+------+-----------+
+| empno | ename  | sal  | daily_sal |
++-------+--------+------+-----------+
+|  7369 | Smith  |  800 |   26.6667 |
+|  7499 | Allen  | 1600 |   53.3333 |
+|  7521 | Ward   | 1250 |   41.6667 |
+|  7900 | James  |  950 |   31.6667 |
+|  7902 | Ford   | 3000 |  100.0000 |
+|  7566 | Jones  | 2975 |   99.1667 |
+|  7698 | Blake  | 2850 |   95.0000 |
+|  7782 | Clark  | 2450 |   81.6667 |
+|  7844 | Turner | 1500 |   50.0000 |
+|  7654 | Martin | 1250 |   41.6667 |
+|  7839 | King   | 5000 |  166.6667 |
+|  7934 | Miller | 1300 |   43.3333 |
+|  7788 | Scott  | 3000 |  100.0000 |
+|  7876 | Adams  | 1100 |   36.6667 |
++-------+--------+------+-----------+
+14 rows in set (0.02 sec)
+
+
+
+
+vi. List the Empno, Ename, Sal, Exp of all emps working for Mgr 7369.
+mysql> select empno,ename,sal from emp where mgr=7369;
+Empty set (0.00 sec)
+
+
+
+
+vii. Display all the details of the emps who’s Comm. Is more than their Sal?
+mysql> select * from emp where comm>sal;
++-------+--------+----------+------+------------+------+------+--------+
+| empno | ename  | job      | mgr  | hiredate   | sal  | comm | deptno |
++-------+--------+----------+------+------------+------+------+--------+
+|  7654 | Martin | Salesman | 7698 | 1981-09-28 | 1250 | 1400 |     30 |
++-------+--------+----------+------+------------+------+------+--------+
+1 row in set (0.00 sec)
+
+
+
+viii. List the emps who are either ‘CLERK’ or ‘ANALYST’ in the Desc order.
+mysql> select * from emp where job="Clerk" or job="Analyst" order by job des
+c;
++-------+--------+---------+------+------------+------+------+--------+
+| empno | ename  | job     | mgr  | hiredate   | sal  | comm | deptno |
++-------+--------+---------+------+------------+------+------+--------+
+|  7369 | Smith  | Clerk   | 7902 | 1980-12-17 |  800 | NULL |     20 |
+|  7876 | Adams  | Clerk   | 7788 | 1987-07-13 | 1100 | NULL |     20 |
+|  7900 | James  | Clerk   | 7698 | 1981-03-12 |  950 | NULL |     30 |
+|  7934 | Miller | Clerk   | 7782 | 1982-01-23 | 1300 | NULL |     10 |
+|  7788 | Scott  | Analyst | 7566 | 1987-06-11 | 3000 | NULL |     20 |
+|  7902 | Ford   | Analyst | 7566 | 1981-03-12 | 3000 | NULL |     20 |
++-------+--------+---------+------+------------+------+------+--------+
+6 rows in set (0.00 sec)
+
+
+
+
+
+ix. List the emps Who Annual sal ranging from 22000 and 45000.
+mysql> select * from emp where sal*12 between 22000 and 45000;
++-------+-------+---------+------+------------+------+------+--------+
+| empno | ename | job     | mgr  | hiredate   | sal  | comm | deptno |
++-------+-------+---------+------+------------+------+------+--------+
+|  7566 | Jones | Manager | 7839 | 1981-04-02 | 2975 | NULL |     20 |
+|  7698 | Blake | Manager | 7839 | 1981-05-01 | 2850 | NULL |     30 |
+|  7782 | Clark | Manager | 7839 | 1981-06-09 | 2450 | NULL |     10 |
+|  7788 | Scott | Analyst | 7566 | 1987-06-11 | 3000 | NULL |     20 |
+|  7902 | Ford  | Analyst | 7566 | 1981-03-12 | 3000 | NULL |     20 |
++-------+-------+---------+------+------------+------+------+--------+
+5 rows in set (0.00 sec)
+
+
+
+x. List the Enames those are starting with ‘S’ and with five characters.
+mysql> select ename from emp where ename like 'S____';
++-------+
+| ename |
++-------+
+| Smith |
+| Scott |
++-------+
+2 rows in set (0.00 sec)
+
+
+
+
+xi. List the emps whose Empno not starting with digit78.
+mysql> select * from emp where empno not like '78%';
++-------+--------+----------+------+------------+------+------+--------+
+| empno | ename  | job      | mgr  | hiredate   | sal  | comm | deptno |
++-------+--------+----------+------+------------+------+------+--------+
+|  7369 | Smith  | Clerk    | 7902 | 1980-12-17 |  800 | NULL |     20 |
+|  7499 | Allen  | Salesman | 7698 | 1981-02-20 | 1600 |  300 |     30 |
+|  7521 | Ward   | Salesman | 7698 | 1981-02-22 | 1250 |  500 |     30 |
+|  7566 | Jones  | Manager  | 7839 | 1981-04-02 | 2975 | NULL |     20 |
+|  7654 | Martin | Salesman | 7698 | 1981-09-28 | 1250 | 1400 |     30 |
+|  7698 | Blake  | Manager  | 7839 | 1981-05-01 | 2850 | NULL |     30 |
+|  7782 | Clark  | Manager  | 7839 | 1981-06-09 | 2450 | NULL |     10 |
+|  7788 | Scott  | Analyst  | 7566 | 1987-06-11 | 3000 | NULL |     20 |
+|  7900 | James  | Clerk    | 7698 | 1981-03-12 |  950 | NULL |     30 |
+|  7902 | Ford   | Analyst  | 7566 | 1981-03-12 | 3000 | NULL |     20 |
+|  7934 | Miller | Clerk    | 7782 | 1982-01-23 | 1300 | NULL |     10 |
++-------+--------+----------+------+------------+------+------+--------+
+11 rows in set (0.00 sec)
+
+
+
+
+
+xii. List all the Clerks of Deptno 20.
+mysql> select * from emp where job="Clerk" and deptno=20;
++-------+-------+-------+------+------------+------+------+--------+
+| empno | ename | job   | mgr  | hiredate   | sal  | comm | deptno |
++-------+-------+-------+------+------------+------+------+--------+
+|  7369 | Smith | Clerk | 7902 | 1980-12-17 |  800 | NULL |     20 |
+|  7876 | Adams | Clerk | 7788 | 1987-07-13 | 1100 | NULL |     20 |
++-------+-------+-------+------+------------+------+------+--------+
+2 rows in set (0.01 sec)
+
+
+xiii. List the Emps who are senior to their own MGRS.
+mysql> select * from emp where empno>mgr;
++-------+--------+----------+------+------------+------+------+--------+
+| empno | ename  | job      | mgr  | hiredate   | sal  | comm | deptno |
++-------+--------+----------+------+------------+------+------+--------+
+|  7788 | Scott  | Analyst  | 7566 | 1987-06-11 | 3000 | NULL |     20 |
+|  7844 | Turner | Salesman | 7698 | 1981-08-09 | 1500 |    0 |     30 |
+|  7876 | Adams  | Clerk    | 7788 | 1987-07-13 | 1100 | NULL |     20 |
+|  7900 | James  | Clerk    | 7698 | 1981-03-12 |  950 | NULL |     30 |
+|  7902 | Ford   | Analyst  | 7566 | 1981-03-12 | 3000 | NULL |     20 |
+|  7934 | Miller | Clerk    | 7782 | 1982-01-23 | 1300 | NULL |     10 |
++-------+--------+----------+------+------------+------+------+--------+
+6 rows in set (0.00 sec)
+
+
+
+
+xiv. List the Emps of Deptno 20 who’s Jobs are same as Deptno10.
+mysql> select * from emp where deptno=20 and job in(select job from emp where deptno=10);
++-------+-------+---------+------+------------+------+------+--------+
+| empno | ename | job     | mgr  | hiredate   | sal  | comm | deptno |
++-------+-------+---------+------+------------+------+------+--------+
+|  7566 | Jones | Manager | 7839 | 1981-04-02 | 2975 | NULL |     20 |
+|  7369 | Smith | Clerk   | 7902 | 1980-12-17 |  800 | NULL |     20 |
+|  7876 | Adams | Clerk   | 7788 | 1987-07-13 | 1100 | NULL |     20 |
++-------+-------+---------+------+------------+------+------+--------+
+3 rows in set (0.00 sec)
+
+
+
+xv. List the Emps who’s Sal is same as FORD or SMITH in desc order of Sal.
+mysql> select * from emp where sal in(select sal from emp where ename="Ford"
+ or ename="Smith") order by sal;
++-------+-------+---------+------+------------+------+------+--------+
+| empno | ename | job     | mgr  | hiredate   | sal  | comm | deptno |
++-------+-------+---------+------+------------+------+------+--------+
+|  7369 | Smith | Clerk   | 7902 | 1980-12-17 |  800 | NULL |     20 |
+|  7788 | Scott | Analyst | 7566 | 1987-06-11 | 3000 | NULL |     20 |
+|  7902 | Ford  | Analyst | 7566 | 1981-03-12 | 3000 | NULL |     20 |
++-------+-------+---------+------+------------+------+------+--------+
+3 rows in set (0.00 sec)
+
+
+
+xvi. List the emps whose jobs same as SMITH or ALLEN.
+mysql> select * from emp where job in(select job from emp where ename="Allen" or ename="Smith");
++-------+--------+----------+------+------------+------+------+--------+
+| empno | ename  | job      | mgr  | hiredate   | sal  | comm | deptno |
++-------+--------+----------+------+------------+------+------+--------+
+|  7369 | Smith  | Clerk    | 7902 | 1980-12-17 |  800 | NULL |     20 |
+|  7499 | Allen  | Salesman | 7698 | 1981-02-20 | 1600 |  300 |     30 |
+|  7521 | Ward   | Salesman | 7698 | 1981-02-22 | 1250 |  500 |     30 |
+|  7654 | Martin | Salesman | 7698 | 1981-09-28 | 1250 | 1400 |     30 |
+|  7844 | Turner | Salesman | 7698 | 1981-08-09 | 1500 |    0 |     30 |
+|  7876 | Adams  | Clerk    | 7788 | 1987-07-13 | 1100 | NULL |     20 |
+|  7900 | James  | Clerk    | 7698 | 1981-03-12 |  950 | NULL |     30 |
+|  7934 | Miller | Clerk    | 7782 | 1982-01-23 | 1300 | NULL |     10 |
++-------+--------+----------+------+------------+------+------+--------+
+8 rows in set (0.00 sec)
+
+
+
+
+xvii. Any jobs of deptno 10 those that are not found in deptno 20.
+mysql> select job from emp where deptno=10 and job not in(select job from emp where deptno=20);
++-----------+
+| job       |
++-----------+
+| President |
++-----------+
+1 row in set (0.00 sec)
+
+
+
+xviii. Find the highest sal of EMP table.
+mysql> select max(sal) from emp;
++----------+
+| max(sal) |
++----------+
+|     5000 |
++----------+
+1 row in set (0.00 sec)
+
+
+
+
+xix. Find details of highest paid employee.
+mysql> select * from emp where sal in(select max(sal) from emp);
++-------+-------+-----------+------+------------+------+------+--------+
+| empno | ename | job       | mgr  | hiredate   | sal  | comm | deptno |
++-------+-------+-----------+------+------------+------+------+--------+
+|  7839 | King  | President | NULL | 1981-11-17 | 5000 | NULL |     10 |
++-------+-------+-----------+------+------------+------+------+--------+
+1 row in set (0.00 sec)
+
+
+
+xx. Find the total sal given to the MGR.
+mysql> select sum(sal) from emp where not mgr="NULL";
++----------+
+| sum(sal) |
++----------+
+|    24025 |
++----------+
+1 row in set (0.00 sec)
+
+
+xxi. List the emps whose names contains ‘A’.
+mysql> select ename from emp where ename like '%a%';
++--------+
+| ename  |
++--------+
+| Allen  |
+| Ward   |
+| Martin |
+| Blake  |
+| Clark  |
+| Adams  |
+| James  |
++--------+
+7 rows in set (0.00 sec)
+
+
+xxii. Find all the emps who earn the minimum Salary for each job wise in ascending order.
+mysql> select min(sal),job from emp group by job order by job;
++----------+-----------+
+| min(sal) | job       |
++----------+-----------+
+|     3000 | Analyst   |
+|      800 | Clerk     |
+|     2450 | Manager   |
+|     5000 | President |
+|     1250 | Salesman  |
++----------+-----------+
+5 rows in set (0.00 sec)
+
+
+
+xxiii. List the emps whose sal greater than Blake’s sal.
+mysql> select * from emp where sal >(select sal from emp where ename="Blake"
+);
++-------+-------+-----------+------+------------+------+------+--------+
+| empno | ename | job       | mgr  | hiredate   | sal  | comm | deptno |
++-------+-------+-----------+------+------------+------+------+--------+
+|  7566 | Jones | Manager   | 7839 | 1981-04-02 | 2975 | NULL |     20 |
+|  7788 | Scott | Analyst   | 7566 | 1987-06-11 | 3000 | NULL |     20 |
+|  7839 | King  | President | NULL | 1981-11-17 | 5000 | NULL |     10 |
+|  7902 | Ford  | Analyst   | 7566 | 1981-03-12 | 3000 | NULL |     20 |
++-------+-------+-----------+------+------------+------+------+--------+
+4 rows in set (0.00 sec)
+
+
+
+xxiv. Create view v1 to select ename, job, dname, loc whose deptno are same.
+mysql> create view v1 as select emp.ename,emp.job,dept.dname,dept.loc from e
+mp join dept on emp.deptno=dept.deptno;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from v1;
++--------+-----------+------------+----------+
+| ename  | job       | dname      | loc      |
++--------+-----------+------------+----------+
+| Clark  | Manager   | Accounting | New York |
+| King   | President | Accounting | New York |
+| Miller | Clerk     | Accounting | New York |
+| Smith  | Clerk     | Research   | Dallas   |
+| Jones  | Manager   | Research   | Dallas   |
+| Scott  | Analyst   | Research   | Dallas   |
+| Adams  | Clerk     | Research   | Dallas   |
+| Ford   | Analyst   | Research   | Dallas   |
+| Allen  | Salesman  | Sales      | Chicago  |
+| Ward   | Salesman  | Sales      | Chicago  |
+| Martin | Salesman  | Sales      | Chicago  |
+| Blake  | Manager   | Sales      | Chicago  |
+| Turner | Salesman  | Sales      | Chicago  |
+| James  | Clerk     | Sales      | Chicago  |
++--------+-----------+------------+----------+
+14 rows in set (0.01 sec)
+
+
+
+
+xxv. Create a procedure with dno as input parameter to fetch ename and dname.
+
+
+
+xxvi. Add column Pin with bigint data type in table student.
+mysql> alter table student add column pin bigint;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| rno   | int         | NO   | PRI | NULL    |       |
+| sname | varchar(20) | YES  |     | NULL    |       |
+| city  | varchar(20) | YES  |     | NULL    |       |
+| state | varchar(20) | YES  |     | NULL    |       |
+| pin   | bigint      | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+
+xxvii. Modify the student table to change the sname length from 14 to 40.
+mysql> alter table student modify sname varchar(40);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| rno   | int         | NO   | PRI | NULL    |       |
+| sname | varchar(40) | YES  |     | NULL    |       |
+| city  | varchar(20) | YES  |     | NULL    |       |
+| state | varchar(20) | YES  |     | NULL    |       |
+| pin   | bigint      | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+
+
+Create trigger to insert data in emp_log table whenever any update of sal in EMP table. You can set action as ‘New Salary’.
